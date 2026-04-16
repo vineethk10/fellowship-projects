@@ -53,6 +53,35 @@ class ConversionStore(DataStore):
     def summary(self):
         print(f'\n[Conversion Log] session: {self.session_name}, total conversions: {self.conversion_count}')
 
+
+class TemperatureLog(DataStore):
+    """Inherits from DataStore. Logs temperature conversions in a clean format."""
+    
+    def __init__(self, location_name):
+        super().__init__(store_name=f"temperatures_{location_name}")
+        self.location_name = location_name
+        self.temp_count = 0
+    
+    def log_temp(self, celsius):
+        """Compute Fahrenheit and log the temperature conversion."""
+        self.temp_count += 1
+        fahrenheit = (celsius * 9/5) + 32
+        record = {"celsius": celsius, "fahrenheit": fahrenheit}
+        self.add(record)
+    
+    def list_all(self):
+        """Override to display temperatures in custom format."""
+        if not self.records:
+            print(f"[TemperatureLog] '{self.location_name}': No temps logged yet.")
+            return
+        print(f"\n[TemperatureLog] '{self.location_name}' — {len(self.records)} reading(s):")
+        for i, r in enumerate(self.records, 1):
+            print(f"  {i}.  {r['celsius']}°C  →  {r['fahrenheit']:.1f}°F")
+    
+    def summary(self):
+        """Print how many temperatures have been logged."""
+        print(f"\n[TemperatureLog] Location '{self.location_name}': {self.temp_count} reading(s) total.")
+
 if __name__ == '__main__':
     print('*'*50)
     print('OOP DEMO')
@@ -87,3 +116,36 @@ if __name__ == '__main__':
 
     for r in log.search('km'):
         print(f' Found in log: {r}')
+
+    # Part C: Test TemperatureLog
+    print('\n' + '='*50)
+    print('PART C: Testing TemperatureLog')
+    print('='*50)
+    temp_log = TemperatureLog("New York")
+    print(f"Stores created: {DataStore.store_count}")  # Should be 3
+    
+    # Log some temperatures
+    temp_log.log_temp(0)      # Freezing point
+    temp_log.log_temp(100)    # Boiling point
+    temp_log.log_temp(37)     # Body temperature
+    
+    # Call overridden list_all()
+    temp_log.list_all()
+    
+    # Call summary() method
+    temp_log.summary()
+
+    # Part D: Prove the Class Variable
+    print('\n' + '='*50)
+    print('PART D: Class Variable Proof')
+    print('='*50)
+    print(f"DataStore.store_count (via class): {DataStore.store_count}")
+    print(f"store.store_count (via DataStore object): {store.store_count}")
+    print(f"log.store_count (via ConversionStore object): {log.store_count}")
+    print(f"temp_log.store_count (via TemperatureLog object): {temp_log.store_count}")
+    
+    print("\nExplanation:")
+    print("All four print statements show the same number (3) because store_count is a")
+    print("CLASS VARIABLE that lives on the DataStore class itself, not on individual")
+    print("objects. All objects—DataStore, ConversionStore, and TemperatureLog—share")
+    print("the same counter. When any object is created, it increments the shared counter.")
