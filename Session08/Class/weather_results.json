@@ -1,0 +1,11 @@
+[
+  {
+    "timestamp": "2026-04-16T21:36:32.264561",
+    "city": "Hyderabad",
+    "country": "India",
+    "temperature_c": 30.6,
+    "condition": "Partly cloudy",
+    "humidity_pct": 59,
+    "wind_kmh": 10.2
+  }
+]

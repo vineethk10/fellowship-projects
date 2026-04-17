@@ -1,0 +1,22 @@
+[
+  {
+    "timestamp": "2026-04-16T22:01:34",
+    "search_term": "India",
+    "country": "India",
+    "official_name": "Republic of India",
+    "capital": "New Delhi",
+    "region": "Asia",
+    "subregion": "Southern Asia",
+    "population": 1417492000
+  },
+  {
+    "timestamp": "2026-04-16T22:16:00",
+    "search_term": "China",
+    "country": "Hong Kong",
+    "official_name": "Hong Kong Special Administrative Region of the People's Republic of China",
+    "capital": "City of Victoria",
+    "region": "Asia",
+    "subregion": "Eastern Asia",
+    "population": 7527500
+  }
+]
