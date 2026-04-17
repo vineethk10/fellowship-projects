@@ -1,4 +1,13 @@
+﻿"""
+main.py — Weather app CLI
+Session 08: APIs, HTTP Requests + Environment Variables
+
+This script creates a WeatherClient and displays the current weather
+for a user-provided city.
+"""
+
 from weather_client import WeatherClient
+
 
 def main():
     print("Welcome to the Weather App!")
@@ -10,7 +19,6 @@ def main():
     client = WeatherClient()
     location, weather = client.fetch(city_name)
     if location and weather:
-        print('\n' + '*' * 50)
         print(f"Weather for {location['city']}, {location['country']}:" )
         print(f"  Temperature: {weather['temperature']}°C")
         print(f"  Condition: {weather['description']}")
